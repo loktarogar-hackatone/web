@@ -3,8 +3,6 @@ import UserIcon from '@material-ui/icons/Person';
 import Card from '../Card/Card';
 import { User as UserType } from '../../types';
 
-const css = require('./User.module.css');
-
 interface Props {
 	user: UserType;
 }
