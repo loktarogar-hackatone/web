@@ -20,12 +20,21 @@ const User: React.FunctionComponent<Props> = ({ user }) => {
 			onClick={() => {}}
 		>
 			<ul>
-				<li>Лицевой счет: {user.clientId}</li>
-				<li>Жилец: {user.name}</li>
-				<li>Телефон: {user.phone}</li>
 				<li>
-					Эл. почта: <a href={`mailto:${user.email}`}>{user.email}</a>
+					<label>Лицевой счет</label> {user.clientId}
 				</li>
+
+				<li>
+					<label>Жилец</label> {user.name}
+				</li>
+
+				{/*<li>*/}
+				{/*<label>Телефон</label> {user.phone}*/}
+				{/*</li>*/}
+
+				{/*<li>*/}
+				{/*<label>Эл. почта</label> <a href={`mailto:${user.email}`}>{user.email}</a>*/}
+				{/*</li>*/}
 			</ul>
 		</Card>
 	);

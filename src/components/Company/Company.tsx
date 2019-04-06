@@ -20,12 +20,24 @@ const Company: React.FunctionComponent<Props> = ({ company }) => {
 			onClick={() => {}}
 		>
 			<ul>
-				<li>Название: {company.name}</li>
-				<li>Юридический адрес: {company.address}</li>
-				<li>ИНН: {company.taxId}</li>
-				<li>Телефон: {company.phone}</li>
 				<li>
-					Эл. почта: <a href={`mailto:${company.email}`}>{company.email}</a>
+					<label>Название</label> {company.name}
+				</li>
+
+				<li>
+					<label>Юридический адрес</label> {company.address}
+				</li>
+
+				<li>
+					<label>ИНН</label> {company.taxId}
+				</li>
+
+				<li>
+					<label>Телефон</label> {company.phone}
+				</li>
+
+				<li>
+					<label>Эл. почта</label> <a href={`mailto:${company.email}`}>{company.email}</a>
 				</li>
 			</ul>
 		</Card>

@@ -78,7 +78,9 @@ const Map: React.FunctionComponent<Props> = memo(({ address }) => {
 			onClick={() => {}}
 		>
 			<ul>
-				<li>г. Саратов, ул. Первомайская, д. 47/53, кв. 150</li>
+				<li>
+					<label>Полный адрес</label>г. Саратов, ул. Первомайская, д. 47/53, кв. 150
+				</li>
 			</ul>
 		</Card>
 	);

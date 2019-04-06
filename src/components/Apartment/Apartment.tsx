@@ -20,11 +20,16 @@ const Apartment: React.FunctionComponent<Props> = ({ apartment }) => {
 		>
 			<ul>
 				<li>
-					{apartment.entrance} подъезд, {apartment.floor} этаж
+					<label>Номер квартиры</label> {apartment.number}
 				</li>
-				<li>Номер квартиры: {apartment.number}</li>
-				<li>Площадь квартиры: {apartment.size} кв. м.</li>
-				<li>Владелец: {apartment.owner}</li>
+
+				<li>
+					<label>Площадь квартиры</label> {apartment.size} кв. м.
+				</li>
+
+				<li>
+					<label>Владелец</label> {apartment.owner}
+				</li>
 			</ul>
 		</Card>
 	);

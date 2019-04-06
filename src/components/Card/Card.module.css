@@ -17,22 +17,33 @@ h6.title {
 .title svg {
 	color: #575757;
 	margin-right: 10px;
-	margin-top: -2px;
+	margin-top: -4px;
 }
 
 .inner ul {
 	padding: 0;
-	margin: 15px 0 0 0;
+	margin: 15px 0 0 34px;
 }
 
 .inner li {
 	list-style-type: none;
-	line-height: 22px;
+	line-height: 21px;
 	font-size: 14px;
+}
+
+.inner li:not(:last-of-type) {
+	margin-bottom: 8px;
 }
 
 .inner li a {
 	white-space: nowrap;
+}
+
+.inner li label {
+	display: block;
+	color: #777777;
+	font-size: 13px;
+	line-height: 18px;
 }
 
 .actions {
