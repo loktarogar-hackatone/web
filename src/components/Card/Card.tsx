@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cn from 'classnames';
 import MUICard from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 const css = require('./Card.module.css');
 
 interface Props {
+	className?: string;
 	title?: React.ReactNode | string;
 	header?: React.ReactNode | string;
 	buttonText?: string;
@@ -16,7 +18,15 @@ interface Props {
 	onButtonClick?: () => void;
 }
 
-const Card: React.FunctionComponent<Props> = ({ buttonText, onButtonClick, onClick, children, title, header }) => {
+const Card: React.FunctionComponent<Props> = ({
+	className,
+	buttonText,
+	onButtonClick,
+	onClick,
+	children,
+	title,
+	header
+}) => {
 	const inner = () => (
 		<div>
 			{header}
@@ -36,7 +46,7 @@ const Card: React.FunctionComponent<Props> = ({ buttonText, onButtonClick, onCli
 	return (
 		<MUICard
 			classes={{
-				root: css.card
+				root: cn(css.card, className)
 			}}
 		>
 			{!!onClick ? <CardActionArea>{inner()}</CardActionArea> : inner()}
