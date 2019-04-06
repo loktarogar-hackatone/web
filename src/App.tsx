@@ -5,6 +5,7 @@ import TopAppBar from './components/TopAppBar/TopAppBar';
 import Card from './components/Card/Card';
 import User from './components/User/User';
 import Apartment from './components/Apartment/Apartment';
+import Company from './components/Company/Company';
 
 const { YMaps } = require('react-yandex-maps');
 const css = require('./App.module.css');
@@ -38,6 +39,16 @@ function PrimarySearchAppBar() {
 							name: 'Наумов Павел Анатольевич',
 							phone: '+7 (927) 132-41-21',
 							email: 'some-email@gmail.com'
+						}}
+					/>
+					<Company
+						company={{
+							id: '1',
+							taxId: '2419240123',
+							name: 'OOO Большие Бугры',
+							phone: '+7 (845) 231-23-11',
+							email: 'big_bugri@gmail.com',
+							address: 'г. Саратов, ул. Московская, д. 731, оф. 26'
 						}}
 					/>
 				</div>

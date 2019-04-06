@@ -41,11 +41,13 @@ const Card: React.FunctionComponent<Props> = ({ buttonText, onButtonClick, onCli
 		>
 			{!!onClick ? <CardActionArea>{inner()}</CardActionArea> : inner()}
 
-			<CardActions classes={{ root: css.actions }}>
-				<Button size="small" color="primary" onClick={onButtonClick}>
-					{buttonText}
-				</Button>
-			</CardActions>
+			{buttonText && (
+				<CardActions classes={{ root: css.actions }}>
+					<Button size="small" color="primary" onClick={onButtonClick}>
+						{buttonText}
+					</Button>
+				</CardActions>
+			)}
 		</MUICard>
 	);
 };

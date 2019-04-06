@@ -28,6 +28,7 @@ h6.title {
 .inner li {
 	list-style-type: none;
 	line-height: 22px;
+	font-size: 14px;
 }
 
 .inner li a {

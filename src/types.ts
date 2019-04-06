@@ -7,6 +7,15 @@ export interface Apartment {
 	owner: string;
 }
 
+export interface Company {
+	id: string;
+	taxId: string;
+	name: string;
+	address: string;
+	phone: string;
+	email?: string
+}
+
 export interface User {
 	id: string;
 	clientId: string;

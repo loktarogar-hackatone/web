@@ -71,22 +71,14 @@ const Map: React.FunctionComponent<Props> = memo(({ address }) => {
 			title={
 				<>
 					<PlaceIcon />
-					<span>Дом</span>
+					<span>Адрес</span>
 				</>
 			}
-			buttonText="Подробнее"
+			buttonText="Информация о доме"
+			onClick={() => {}}
 		>
 			<ul>
-				<li>Адрес: г. Саратов, ул. Первомайская, д. 47/53, кв. 150</li>
-
-				<li>
-					Управляющая компания: <a href="#">ООО &laquo;Утка&raquo;</a>
-				</li>
-
-				<li>
-					Контакты: (8452) 67-75-60, 67-75-81, 67-75-82,{' '}
-					<a href="mailto:uk-volzhskay@yandex.ru">uk-volzhskay@yandex.ru</a>
-				</li>
+				<li>г. Саратов, ул. Первомайская, д. 47/53, кв. 150</li>
 			</ul>
 		</Card>
 	);

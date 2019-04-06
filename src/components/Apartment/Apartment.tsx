@@ -17,7 +17,6 @@ const Apartment: React.FunctionComponent<Props> = ({ apartment }) => {
 					<span>Квартира</span>
 				</>
 			}
-			buttonText="Подробнее"
 		>
 			<ul>
 				<li>

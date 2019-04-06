@@ -16,7 +16,8 @@ const User: React.FunctionComponent<Props> = ({ user }) => {
 					<span>Жилец</span>
 				</>
 			}
-			buttonText="Подробнее"
+			buttonText="Перейти в профиль"
+			onClick={() => {}}
 		>
 			<ul>
 				<li>Лицевой счет: {user.clientId}</li>
