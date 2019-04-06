@@ -17,6 +17,17 @@ function PrimarySearchAppBar() {
 			<div className={css.page}>
 				<div className={css.col}>
 					<Map address="Саратов, Первомайская, 47/53" />
+
+					<Apartment
+						apartment={{
+							id: '1',
+							number: 150,
+							size: 45,
+							entrance: 3,
+							floor: 7,
+							owner: 'Васильев Сергей Петрович'
+						}}
+					/>
 				</div>
 
 				<div className={css.col}>
@@ -27,16 +38,6 @@ function PrimarySearchAppBar() {
 							name: 'Наумов Павел Анатольевич',
 							phone: '+7 (927) 132-41-21',
 							email: 'some-email@gmail.com'
-						}}
-					/>
-
-					<Apartment
-						apartment={{
-							id: '1',
-							number: 150,
-							size: 45,
-							entrance: 3,
-							floor: 7
 						}}
 					/>
 				</div>

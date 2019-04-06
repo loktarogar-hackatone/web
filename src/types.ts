@@ -4,6 +4,7 @@ export interface Apartment {
 	size: number;
 	floor: number;
 	entrance: number;
+	owner: string;
 }
 
 export interface User {
