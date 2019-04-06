@@ -23,3 +23,9 @@ export interface User {
 	phone: string;
 	email: string;
 }
+
+export interface NewsEvent {
+	id: string;
+	date: Date;
+	text: string;
+}

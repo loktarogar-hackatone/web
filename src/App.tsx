@@ -2,10 +2,10 @@ import React from 'react';
 
 import Map from './components/Map/Map';
 import TopAppBar from './components/TopAppBar/TopAppBar';
-import Card from './components/Card/Card';
 import User from './components/User/User';
 import Apartment from './components/Apartment/Apartment';
 import Company from './components/Company/Company';
+import Feed from './components/Feed/Feed';
 
 const { YMaps } = require('react-yandex-maps');
 const css = require('./App.module.css');
@@ -54,7 +54,22 @@ function PrimarySearchAppBar() {
 				</div>
 
 				<div className={css.col}>
-					<Card title="Жилец" buttonText="Подробнее" />
+					<Feed
+						news={[
+							{
+								id: '1',
+								date: new Date(),
+								text:
+									'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo quam, tenetur! Animi architecto commodi dignissimos dolore facere in iste, itaque labore molestiae optio perspiciatis, quisquam, repellat rerum sapiente velit voluptatibus.'
+							},
+							{
+								id: '2',
+								date: new Date(),
+								text:
+									'Animi architecto commodi dignissimos dolore facere in iste, itaque labore molestiae optio perspiciatis, quisquam, repellat rerum sapiente velit voluptatibus.'
+							}
+						]}
+					/>
 				</div>
 			</div>
 		</YMaps>
