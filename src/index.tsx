@@ -3,8 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { install, ThemeProvider } from '@material-ui/styles';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+install();
+
+ReactDOM.render(
+	<ThemeProvider
+		theme={
+			{
+				shape: {
+					borderRadius: 2
+				},
+				spacing: {
+					unit: 10
+				}
+			} as any
+		}
+	>
+		<App />
+	</ThemeProvider>,
+	document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
