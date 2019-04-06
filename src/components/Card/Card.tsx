@@ -10,7 +10,7 @@ const css = require('./Card.module.css');
 
 interface Props {
 	title?: string;
-	text?: React.ReactNode | string;
+	header?: React.ReactNode | string;
 	width?: string;
 	buttonText?: string;
 	onClick?: () => void;
@@ -24,11 +24,11 @@ const Card: React.FunctionComponent<Props> = ({
 	width = '300px',
 	children,
 	title,
-	text
+	header
 }) => {
 	const inner = () => (
 		<div>
-			{children}
+			{header}
 
 			<CardContent>
 				{title && (
@@ -37,7 +37,7 @@ const Card: React.FunctionComponent<Props> = ({
 					</Typography>
 				)}
 
-				{text && <div className={css.text}>{text}</div>}
+				{children}
 			</CardContent>
 		</div>
 	);

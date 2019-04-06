@@ -47,37 +47,40 @@ const Map: React.FunctionComponent<Props> = memo(({ address }) => {
 
 	const handleOnLoaded = () => setIsLoading(false);
 
-	const info = (
-		<ul className={css.info}>
-			<li className={css.info__item}>
-				<span>Управляющая компания:</span> <a href="#">ООО &laquo;Утка&raquo;</a>
-			</li>
-
-			<li className={css.info__item}>
-				<span>Контакты:</span> (8452) 67-75-60, 67-75-81, 67-75-82,{' '}
-				<a href="mailto:uk-volzhskay@yandex.ru">uk-volzhskay@yandex.ru</a>
-			</li>
-		</ul>
-	);
-
 	return (
-		<Card title={address} text={info} width="400px" buttonText="Подробнее">
-			<div className={css.wrapper}>
-				{isLoading && <Loader className={css.loader} />}
+		<Card
+			header={
+				<div className={css.wrapper}>
+					{isLoading && <Loader className={css.loader} />}
 
-				<MapComponent
-					className={css.map}
-					onLoad={handleOnLoaded}
-					defaultState={{
-						center: coordinates,
-						zoom: 17,
-						behaviors: ['drag'],
-						options: []
-					}}
-				>
-					<Placemark geometry={coordinates} />
-				</MapComponent>
-			</div>
+					<MapComponent
+						className={css.map}
+						onLoad={handleOnLoaded}
+						defaultState={{
+							center: coordinates,
+							zoom: 17,
+							behaviors: ['drag'],
+							options: []
+						}}
+					>
+						<Placemark geometry={coordinates} />
+					</MapComponent>
+				</div>
+			}
+			title={address}
+			width="400px"
+			buttonText="Подробнее"
+		>
+			<ul className={css.info}>
+				<li className={css.info__item}>
+					<span>Управляющая компания:</span> <a href="#">ООО &laquo;Утка&raquo;</a>
+				</li>
+
+				<li className={css.info__item}>
+					<span>Контакты:</span> (8452) 67-75-60, 67-75-81, 67-75-82,{' '}
+					<a href="mailto:uk-volzhskay@yandex.ru">uk-volzhskay@yandex.ru</a>
+				</li>
+			</ul>
 		</Card>
 	);
 });
