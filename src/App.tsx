@@ -1,104 +1,19 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Map from './components/Map/Map';
-import TopAppBar from './components/TopAppBar/TopAppBar';
-import User from './components/User/User';
-import Apartment from './components/Apartment/Apartment';
-import Company from './components/Company/Company';
-import Feed from './components/Feed/Feed';
-import { Bar } from 'react-chartjs-2';
-import Card from './components/Card/Card';
+import Dashboard from './components/Dashboard/Dashboard';
 
-const { YMaps } = require('react-yandex-maps');
-const css = require('./App.module.css');
+require('./App.module.css');
 
 function PrimarySearchAppBar() {
 	return (
-		<YMaps>
-			<TopAppBar />
-
-			<div className={css.page}>
-				<div className={css.col}>
-					<Map address="Саратов, Первомайская, 47/53" />
-
-					<Apartment
-						apartment={{
-							id: '1',
-							number: 150,
-							size: 45,
-							entrance: 3,
-							floor: 7,
-							owner: 'Васильев Сергей Петрович'
-						}}
-					/>
-				</div>
-
-				<div className={css.col}>
-					<Card>
-						<Bar
-							data={{
-								labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-								datasets: [
-									{
-										label: 'My First dataset',
-										backgroundColor: 'rgba(255,99,132,0.2)',
-										borderColor: 'rgba(255,99,132,1)',
-										borderWidth: 1,
-										hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-										hoverBorderColor: 'rgba(255,99,132,1)',
-										data: [65, 59, 80, 81, 56, 55, 40]
-									}
-								]
-							}}
-							width={100}
-							options={{
-								maintainAspectRatio: false
-							}}
-						/>
-					</Card>
-
-					<User
-						user={{
-							id: '1',
-							clientId: '857350124124',
-							name: 'Наумов Павел Анатольевич',
-							phone: '+7 (927) 132-41-21',
-							email: 'some-email@gmail.com'
-						}}
-					/>
-
-					<Company
-						company={{
-							id: '1',
-							taxId: '2419240123',
-							name: 'OOO Большие Бугры',
-							phone: '+7 (845) 231-23-11',
-							email: 'big_bugri@gmail.com',
-							address: 'г. Саратов, ул. Московская, д. 731, оф. 26'
-						}}
-					/>
-				</div>
-
-				<div className={css.col}>
-					<Feed
-						news={[
-							{
-								id: '1',
-								date: new Date(),
-								text:
-									'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo quam, tenetur! Animi architecto commodi dignissimos dolore facere in iste, itaque labore molestiae optio perspiciatis, quisquam, repellat rerum sapiente velit voluptatibus.'
-							},
-							{
-								id: '2',
-								date: new Date(),
-								text:
-									'Animi architecto commodi dignissimos dolore facere in iste, itaque labore molestiae optio perspiciatis, quisquam, repellat rerum sapiente velit voluptatibus.'
-							}
-						]}
-					/>
-				</div>
-			</div>
-		</YMaps>
+		<BrowserRouter>
+			<Switch>
+				<Route path="/" exact>
+					<Dashboard />
+				</Route>
+			</Switch>
+		</BrowserRouter>
 	);
 }
 
