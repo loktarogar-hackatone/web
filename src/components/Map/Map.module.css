@@ -15,13 +15,3 @@
 .loader {
 	position: absolute;
 }
-
-.info {
-	padding: 0;
-	margin: 15px 0 0 0;
-}
-
-.info__item {
-	list-style-type: none;
-	line-height: 22px;
-}

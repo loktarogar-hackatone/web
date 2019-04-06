@@ -1,13 +1,33 @@
 .card {
-	width: 300px;
+	width: 100%;
 }
 
-.title {
+h6.title {
 	margin-top: 0;
 	font-weight: 500;
+
+	display: flex;
+	align-items: center;
 }
 
-.text {
+.title svg {
+	color: #575757;
+	margin-right: 10px;
+	margin-top: -2px;
+}
+
+.inner ul {
+	padding: 0;
+	margin: 15px 0 0 0;
+}
+
+.inner li {
+	list-style-type: none;
+	line-height: 22px;
+}
+
+.inner li a {
+	white-space: nowrap;
 }
 
 .actions {

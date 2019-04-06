@@ -9,23 +9,14 @@ import Typography from '@material-ui/core/Typography';
 const css = require('./Card.module.css');
 
 interface Props {
-	title?: string;
+	title?: React.ReactNode | string;
 	header?: React.ReactNode | string;
-	width?: string;
 	buttonText?: string;
 	onClick?: () => void;
 	onButtonClick?: () => void;
 }
 
-const Card: React.FunctionComponent<Props> = ({
-	buttonText,
-	onButtonClick,
-	onClick,
-	width = '300px',
-	children,
-	title,
-	header
-}) => {
+const Card: React.FunctionComponent<Props> = ({ buttonText, onButtonClick, onClick, children, title, header }) => {
 	const inner = () => (
 		<div>
 			{header}
@@ -37,16 +28,13 @@ const Card: React.FunctionComponent<Props> = ({
 					</Typography>
 				)}
 
-				{children}
+				<div className={css.inner}>{children}</div>
 			</CardContent>
 		</div>
 	);
 
 	return (
 		<MUICard
-			style={{
-				width: width
-			}}
 			classes={{
 				root: css.card
 			}}

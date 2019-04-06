@@ -1,8 +1,25 @@
 :global body {
 	background-color: #ededed;
-	font-size: 13px;
+	font-size: 14px;
 }
 
 .page {
 	padding: 20px;
+
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.col {
+	flex-grow: 1;
+	flex-shrink: 1;
+	width: 460px;
+	max-width: 460px;
+	min-width: 296px;
+	flex-basis: 296px;
+}
+
+.col:not(:last-of-type) {
+	margin-right: 10px;
 }

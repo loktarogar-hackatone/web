@@ -1,7 +1,7 @@
 import * as React from 'react';
-import cn from 'classnames';
 import { memo, useEffect, useState } from 'react';
 import Loader from '@material-ui/core/CircularProgress';
+import PlaceIcon from '@material-ui/icons/Place';
 
 import Card from '../Card/Card';
 import { YANDEX_API_KEY } from '../../utils';
@@ -56,6 +56,7 @@ const Map: React.FunctionComponent<Props> = memo(({ address }) => {
 					<MapComponent
 						className={css.map}
 						onLoad={handleOnLoaded}
+						width="100%"
 						defaultState={{
 							center: coordinates,
 							zoom: 17,
@@ -67,17 +68,23 @@ const Map: React.FunctionComponent<Props> = memo(({ address }) => {
 					</MapComponent>
 				</div>
 			}
-			title={address}
-			width="400px"
+			title={
+				<>
+					<PlaceIcon />
+					<span>Дом</span>
+				</>
+			}
 			buttonText="Подробнее"
 		>
-			<ul className={css.info}>
-				<li className={css.info__item}>
-					<span>Управляющая компания:</span> <a href="#">ООО &laquo;Утка&raquo;</a>
+			<ul>
+				<li>Адрес: г. Саратов, ул. Первомайская, д. 47/53, кв. 150</li>
+
+				<li>
+					Управляющая компания: <a href="#">ООО &laquo;Утка&raquo;</a>
 				</li>
 
-				<li className={css.info__item}>
-					<span>Контакты:</span> (8452) 67-75-60, 67-75-81, 67-75-82,{' '}
+				<li>
+					Контакты: (8452) 67-75-60, 67-75-81, 67-75-82,{' '}
 					<a href="mailto:uk-volzhskay@yandex.ru">uk-volzhskay@yandex.ru</a>
 				</li>
 			</ul>
