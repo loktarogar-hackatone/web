@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import { getJwt, SERVICE_API_URL } from './utils';
 import Auth from './components/Auth/Auth';
 import Helmet from 'react-helmet';
+import Registration from './components/Registration/Registration';
 
 require('./App.module.css');
 
@@ -45,6 +46,10 @@ const App: React.FunctionComponent = () => {
 			</Helmet>
 
 			<Switch>
+				<Route path="/registration">
+					<Registration />
+				</Route>
+
 				<Route path="/auth">
 					<Auth />
 				</Route>

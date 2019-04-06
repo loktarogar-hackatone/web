@@ -7,8 +7,9 @@
 	justify-content: center;
 }
 
-.card {
+div.card {
 	width: 350px;
+	overflow: visible;
 }
 
 .card ul {
@@ -33,6 +34,6 @@ h1.title {
 	margin-top: 0;
 }
 
-.registration {
+.auth {
 	text-align: center;
 }

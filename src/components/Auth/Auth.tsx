@@ -31,6 +31,12 @@ const Auth: React.FunctionComponent = () => {
 							Войти
 						</Button>
 					</li>
+
+					<li>
+						<div className={css.registration}>
+							<a href="/registration">или зарегистрироваться</a>
+						</div>
+					</li>
 				</ul>
 			</Card>
 		</div>
