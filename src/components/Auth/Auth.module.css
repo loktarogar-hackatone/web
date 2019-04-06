@@ -19,10 +19,14 @@ div.field {
 	display: flex;
 }
 
+.card li:not(:first-of-type) {
+	margin-top: 12px;
+}
+
 button.button {
 	width: 100%;
 	height: 50px;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 h1.title {
