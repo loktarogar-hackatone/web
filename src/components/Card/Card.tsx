@@ -3,45 +3,59 @@ import MUICard from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 const css = require('./Card.module.css');
 
 interface Props {
-	title: string;
-	text?: string;
-	clickable?: boolean;
+	title?: string;
+	text?: React.ReactNode | string;
+	width?: string;
+	buttonText?: string;
+	onClick?: () => void;
+	onButtonClick?: () => void;
 }
 
-const Card: React.FunctionComponent<Props> = ({ children, title, text, clickable = false }) => {
+const Card: React.FunctionComponent<Props> = ({
+	buttonText,
+	onButtonClick,
+	onClick,
+	width = '300px',
+	children,
+	title,
+	text
+}) => {
 	const inner = () => (
 		<div>
 			{children}
 
 			<CardContent>
-				<div className={css.title}>{title}</div>
+				{title && (
+					<Typography className={css.title} variant="h6">
+						{title}
+					</Typography>
+				)}
 
-				<Typography component="p">{text}</Typography>
+				{text && <div className={css.text}>{text}</div>}
 			</CardContent>
 		</div>
 	);
 
 	return (
 		<MUICard
+			style={{
+				width: width
+			}}
 			classes={{
 				root: css.card
 			}}
 		>
-			{clickable ? <CardActionArea>{inner()}</CardActionArea> : inner()}
+			{!!onClick ? <CardActionArea>{inner()}</CardActionArea> : inner()}
 
-			<CardActions>
-				<Button size="small" color="primary">
-					Share
-				</Button>
-
-				<Button size="small" color="primary">
-					Learn More
+			<CardActions classes={{ root: css.actions }}>
+				<Button size="small" color="primary" onClick={onButtonClick}>
+					{buttonText}
 				</Button>
 			</CardActions>
 		</MUICard>

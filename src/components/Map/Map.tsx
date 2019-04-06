@@ -1,6 +1,9 @@
 import * as React from 'react';
-import Card from '../Card/Card';
+import cn from 'classnames';
 import { memo, useEffect, useState } from 'react';
+import Loader from '@material-ui/core/CircularProgress';
+
+import Card from '../Card/Card';
 import { YANDEX_API_KEY } from '../../utils';
 
 const css = require('./Map.module.css');
@@ -11,7 +14,8 @@ interface Props {
 }
 
 const Map: React.FunctionComponent<Props> = memo(({ address }) => {
-	const [coordinates, setCoordinates] = useState(null);
+	const [coordinates, setCoordinates] = useState<number[]>([]);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	const getCoordinates = async (address: string) => {
 		const response = await fetch(
@@ -41,19 +45,39 @@ const Map: React.FunctionComponent<Props> = memo(({ address }) => {
 		getCoordinates(address).then(coordinates => setCoordinates(coordinates));
 	}, [address]);
 
+	const handleOnLoaded = () => setIsLoading(false);
+
+	const info = (
+		<ul className={css.info}>
+			<li className={css.info__item}>
+				<span>Управляющая компания:</span> <a href="#">ООО &laquo;Утка&raquo;</a>
+			</li>
+
+			<li className={css.info__item}>
+				<span>Контакты:</span> (8452) 67-75-60, 67-75-81, 67-75-82,{' '}
+				<a href="mailto:uk-volzhskay@yandex.ru">uk-volzhskay@yandex.ru</a>
+			</li>
+		</ul>
+	);
+
 	return (
-		<Card title={address}>
-			<MapComponent
-				className={css.map}
-				defaultState={{
-					center: coordinates,
-					zoom: 17,
-					behaviors: ['drag'],
-					options: []
-				}}
-			>
-				<Placemark geometry={coordinates} />
-			</MapComponent>
+		<Card title={address} text={info} width="400px" buttonText="Подробнее">
+			<div className={css.wrapper}>
+				{isLoading && <Loader className={css.loader} />}
+
+				<MapComponent
+					className={css.map}
+					onLoad={handleOnLoaded}
+					defaultState={{
+						center: coordinates,
+						zoom: 17,
+						behaviors: ['drag'],
+						options: []
+					}}
+				>
+					<Placemark geometry={coordinates} />
+				</MapComponent>
+			</div>
 		</Card>
 	);
 });
