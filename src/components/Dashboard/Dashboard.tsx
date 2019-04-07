@@ -69,7 +69,7 @@ const Dashboard: React.FunctionComponent<Props> = ({ user }) => {
 			{!isB2B && (
 				<div className={css.page}>
 					<div className={css.col}>
-						<Map address="Саратов, Первомайская, 47/53" />
+						<Map address={user.buildData[user.buildingIds[0]].address} />
 
 						<Apartment
 							apartment={{

@@ -23,6 +23,13 @@ export interface User {
 	phone: string;
 	email: string;
 	userType: UserRole;
+	buildingIds?: string[];
+	buildData?: {
+		[buildingId: string]: {
+			address: string;
+			managementCompany: string;
+		}
+	};
 }
 
 export enum UserRole {
