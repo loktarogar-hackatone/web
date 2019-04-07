@@ -7,7 +7,9 @@ import Apartment from '../Apartment/Apartment';
 import Company from '../Company/Company';
 import Feed from '../Feed/Feed';
 import Charts from '../Charts/Charts';
-import { User as UserType, UserRole } from '../../types';
+import { MeterType, User as UserType, UserRole } from '../../types';
+import Card from '../Card/Card';
+import B2BCharts from '../B2BCharts/B2BCharts';
 
 const { YMaps } = require('react-yandex-maps');
 const css = require('./Dashboard.module.css');
@@ -44,8 +46,9 @@ const Dashboard: React.FunctionComponent<Props> = ({ user }) => {
 					</div>
 
 					<div className={css.col}>
-						<Charts meter="0" />
-						<Charts meter="0" />
+						{user.buildingIds.map(buildingId => (
+							<B2BCharts key={buildingId} buildingId={buildingId} meterType={MeterType.Electric} />
+						))}
 					</div>
 
 					<div className={css.col}>
