@@ -1,5 +1,4 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
 
 import Map from '../Map/Map';
 import TopAppBar from '../TopAppBar/TopAppBar';
@@ -7,7 +6,7 @@ import User from '../User/User';
 import Apartment from '../Apartment/Apartment';
 import Company from '../Company/Company';
 import Feed from '../Feed/Feed';
-import Card from '../Card/Card';
+import Charts from '../Charts/Charts';
 import { User as UserType } from '../../types';
 
 const { YMaps } = require('react-yandex-maps');
@@ -39,28 +38,7 @@ const Dashboard: React.FunctionComponent<Props> = ({ user }) => {
 				</div>
 
 				<div className={css.col}>
-					<Card>
-						<Bar
-							data={{
-								labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-								datasets: [
-									{
-										label: 'My First dataset',
-										backgroundColor: 'rgba(255,99,132,0.2)',
-										borderColor: 'rgba(255,99,132,1)',
-										borderWidth: 1,
-										hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-										hoverBorderColor: 'rgba(255,99,132,1)',
-										data: [65, 59, 80, 81, 56, 55, 40]
-									}
-								]
-							}}
-							width={100}
-							options={{
-								maintainAspectRatio: false
-							}}
-						/>
-					</Card>
+					<Charts meter="0" />
 
 					<User user={user} />
 
