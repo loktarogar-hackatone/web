@@ -3,11 +3,13 @@ import { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { OptionsType, ValueType } from 'react-select/lib/types';
 import Button from '@material-ui/core/Button';
+import Switch from '@material-ui/core/Switch';
 import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
 import Select from 'react-select';
 
 import Card from '../Card/Card';
 import { SERVICE_API_URL, setJwt } from '../../utils';
+import { UserType } from '../../types';
 
 const css = require('./Registration.module.css');
 
@@ -22,6 +24,7 @@ interface RegistrationRequestBody {
 	Email?: string;
 	Phone?: string;
 	BuildingId?: string;
+	Inn?: string;
 }
 
 interface RegistrationResponseBody {
@@ -31,6 +34,7 @@ interface RegistrationResponseBody {
 
 const Registration: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
 	const [options, setOptions] = useState<OptionsType<AutocompleteItem>>([]);
+	const [mode, setMode] = useState(UserType.B2C);
 
 	const handleChange = (value: ValueType<AutocompleteItem>) => {
 		console.log(value);
@@ -84,10 +88,21 @@ const Registration: React.FunctionComponent<RouteComponentProps> = ({ history })
 		}
 	};
 
+	const handleModeChange = (event: React.ChangeEvent, checked: boolean) => {
+		setMode(checked ? UserType.B2B : UserType.B2C);
+	};
+
 	return (
 		<div className={css.wrapper}>
 			<Card className={css.card}>
 				<h1 className={css.title}>Регистрация</h1>
+
+				<div>
+					<label>
+						Зарегистрировать УК
+						<Switch color="primary" checked={mode === UserType.B2B} onChange={handleModeChange} />
+					</label>
+				</div>
 
 				<form onSubmit={handleFormSubmit}>
 					<ul>
@@ -121,12 +136,17 @@ const Registration: React.FunctionComponent<RouteComponentProps> = ({ history })
 						</li>
 
 						<li>
-							<Select
-								options={options}
-								onChange={handleChange}
-								onInputChange={handleInputChange}
-								name="BuildingId"
-							/>
+							{mode === UserType.B2C ? (
+								<Select
+									options={options}
+									onChange={handleChange}
+									onInputChange={handleInputChange}
+									name="BuildingId"
+									placeholder="Адрес проживания"
+								/>
+							) : (
+								<TextField className={css.field} variant="outlined" label="ИНН" name="Inn" />
+							)}
 						</li>
 
 						<li>

@@ -22,7 +22,12 @@ export interface User {
 	fullName: string;
 	phone: string;
 	email: string;
-	userType: 'B2C'|'B2B';
+	userType: UserType;
+}
+
+export enum UserType {
+	B2B = 'B2B',
+	B2C = 'B2C'
 }
 
 export interface NewsEvent {
