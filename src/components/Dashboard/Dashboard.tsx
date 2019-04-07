@@ -12,7 +12,7 @@ import Card from '../Card/Card';
 const { YMaps } = require('react-yandex-maps');
 const css = require('./Dashboard.module.css');
 
-function Dashboard() {
+const Dashboard: React.FunctionComponent = () => {
 	return (
 		<YMaps>
 			<TopAppBar />
@@ -57,16 +57,7 @@ function Dashboard() {
 						/>
 					</Card>
 
-					<User
-						user={{
-							id: '1',
-							clientId: '857350124124',
-							fullName: 'Наумов Павел Анатольевич',
-							phone: '+7 (927) 132-41-21',
-							email: 'some-email@gmail.com',
-							userType: 'B2C'
-						}}
-					/>
+					<User />
 
 					<Company
 						company={{
@@ -101,6 +92,6 @@ function Dashboard() {
 			</div>
 		</YMaps>
 	);
-}
+};
 
 export default Dashboard;
