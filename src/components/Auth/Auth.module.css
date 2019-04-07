@@ -36,3 +36,24 @@ h1.title {
 .registration {
 	text-align: center;
 }
+
+.test {
+	margin-top: 15px;
+	padding-top: 15px;
+	border-top: 1px solid #d9d9d9;
+}
+
+.test__title {
+	font-size: 20px;
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.test__buttons {
+	display: flex;
+	justify-content: center;
+}
+
+.test__buttons button:not(:last-of-type) {
+	margin-right: 10px;
+}

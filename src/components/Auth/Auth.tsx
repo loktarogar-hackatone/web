@@ -86,6 +86,66 @@ const Auth: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
 						</li>
 					</ul>
 				</form>
+
+				<div className={css.test}>
+					<div className={css.test__title}>Тестовый вход</div>
+
+					<div className={css.test__buttons}>
+						<Button
+							variant="raised"
+							color="default"
+							onClick={async () => {
+								const response = await fetch(`${SERVICE_API_URL}/auth/login`, {
+									method: 'POST',
+									body: JSON.stringify({
+										Email: 'ecrofeg1@gmail.com',
+										Password: 'qwerty123'
+									}),
+									headers: new Headers({
+										'content-type': 'application/json'
+									})
+								});
+
+								const data: AuthResponseBody = await response.json();
+
+								if (data.token) {
+									setJwt(data.token);
+									history.push('/');
+									document.location.reload();
+								}
+							}}
+						>
+							жилец
+						</Button>
+
+						<Button
+							variant="raised"
+							color="default"
+							onClick={async () => {
+								const response = await fetch(`${SERVICE_API_URL}/auth/login`, {
+									method: 'POST',
+									body: JSON.stringify({
+										Email: 'some_b2b@gmail.com',
+										Password: 'qwerty123'
+									}),
+									headers: new Headers({
+										'content-type': 'application/json'
+									})
+								});
+
+								const data: AuthResponseBody = await response.json();
+
+								if (data.token) {
+									setJwt(data.token);
+									history.push('/');
+									document.location.reload();
+								}
+							}}
+						>
+							администратор
+						</Button>
+					</div>
+				</div>
 			</Card>
 		</div>
 	);
