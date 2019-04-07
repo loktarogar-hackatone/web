@@ -2,7 +2,7 @@ import * as React from 'react';
 import UserIcon from '@material-ui/icons/Person';
 
 import Card from '../Card/Card';
-import { User as UserType } from '../../types';
+import { User as UserType, UserRole } from '../../types';
 
 interface Props {
 	user: UserType;
@@ -14,7 +14,7 @@ const User: React.FunctionComponent<Props> = ({ user }) => {
 			title={
 				<>
 					<UserIcon />
-					<span>Жилец</span>
+					<span>{user.userType === UserRole.B2B ? 'Администратор' : 'Жилец'}</span>
 				</>
 			}
 			buttonText="Перейти в профиль"
@@ -27,7 +27,7 @@ const User: React.FunctionComponent<Props> = ({ user }) => {
 					</li>
 
 					<li>
-						<label>Жилец</label> {user.fullName}
+						<label>{user.userType === UserRole.B2B ? 'Администратор' : 'Жилец'}</label> {user.fullName}
 					</li>
 
 					{/*<li>*/}
