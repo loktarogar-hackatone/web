@@ -24,9 +24,9 @@ const Feed: React.FunctionComponent<Props> = ({ news }) => {
 			onClick={() => {}}
 		>
 			<div className={css.feed}>
-				{news.map(event => (
-					<div key={event.id} className={css.event}>
-						<div className={css.date}>{format(event.date, 'D MMMM')}</div>
+				{news.map((event, index) => (
+					<div key={index} className={css.event}>
+						<div className={css.date}>{format(event.createDate, 'D MMMM')}</div>
 						<div className={css.text}>{event.text}</div>
 					</div>
 				))}

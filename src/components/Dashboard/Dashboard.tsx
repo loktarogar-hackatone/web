@@ -21,7 +21,10 @@ const Dashboard: React.FunctionComponent<Props> = ({ user }) => {
 
 	return (
 		<YMaps>
-			<TopAppBar />
+			<TopAppBar
+				isB2B={isB2B}
+				houseId={user.buildingIds && user.buildingIds.length ? user.buildingIds[0] : '0'}
+			/>
 
 			{isB2B && (
 				<div className={css.page}>
@@ -46,22 +49,7 @@ const Dashboard: React.FunctionComponent<Props> = ({ user }) => {
 					</div>
 
 					<div className={css.col}>
-						<Feed
-							news={[
-								{
-									id: '1',
-									date: new Date(),
-									text:
-										'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo quam, tenetur! Animi architecto commodi dignissimos dolore facere in iste, itaque labore molestiae optio perspiciatis, quisquam, repellat rerum sapiente velit voluptatibus.'
-								},
-								{
-									id: '2',
-									date: new Date(),
-									text:
-										'Animi architecto commodi dignissimos dolore facere in iste, itaque labore molestiae optio perspiciatis, quisquam, repellat rerum sapiente velit voluptatibus.'
-								}
-							]}
-						/>
+						<Feed news={user.feed.reverse()} />
 					</div>
 				</div>
 			)}
@@ -101,22 +89,7 @@ const Dashboard: React.FunctionComponent<Props> = ({ user }) => {
 					</div>
 
 					<div className={css.col}>
-						<Feed
-							news={[
-								{
-									id: '1',
-									date: new Date(),
-									text:
-										'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo quam, tenetur! Animi architecto commodi dignissimos dolore facere in iste, itaque labore molestiae optio perspiciatis, quisquam, repellat rerum sapiente velit voluptatibus.'
-								},
-								{
-									id: '2',
-									date: new Date(),
-									text:
-										'Animi architecto commodi dignissimos dolore facere in iste, itaque labore molestiae optio perspiciatis, quisquam, repellat rerum sapiente velit voluptatibus.'
-								}
-							]}
-						/>
+						<Feed news={user.feed.reverse()} />
 					</div>
 				</div>
 			)}

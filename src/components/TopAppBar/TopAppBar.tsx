@@ -48,11 +48,20 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const TopAppBar: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
+interface OwnProps {
+	isB2B: boolean;
+	houseId: string;
+}
+
+type Props = OwnProps & RouteComponentProps;
+
+const TopAppBar: React.FunctionComponent<Props> = ({ history, isB2B, houseId }) => {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement>(null);
-	const [open, setOpen] = React.useState(false);
+	const [addMeterIsOpen, setMeterIsOpen] = React.useState(false);
+	const [addEventIsOpen, setEventIsOpen] = React.useState(false);
 	const [meterId, setMeterId] = React.useState('');
+	const [eventText, setEventText] = React.useState('');
 
 	const isMenuOpen = Boolean(anchorEl);
 
@@ -71,12 +80,20 @@ const TopAppBar: React.FunctionComponent<RouteComponentProps> = ({ history }) =>
 		document.location.reload();
 	}
 
-	function handleClickOpen() {
-		setOpen(true);
+	function handleMeterOpen() {
+		setMeterIsOpen(true);
 	}
 
-	function handleClose() {
-		setOpen(false);
+	function handleMeterClose() {
+		setMeterIsOpen(false);
+	}
+
+	function handleEventOpen() {
+		setEventIsOpen(true);
+	}
+
+	function handleEventClose() {
+		setEventIsOpen(false);
 	}
 
 	const renderMenu = (
@@ -109,10 +126,19 @@ const TopAppBar: React.FunctionComponent<RouteComponentProps> = ({ history }) =>
 						{/*</Badge>*/}
 						{/*</IconButton>*/}
 
-						<Button style={{ color: '#ffffff', marginRight: 20 }} onClick={handleClickOpen}>
-							<AddIcon />
-							<span style={{ marginLeft: 10 }}>Добавить счетчик</span>
-						</Button>
+						{!isB2B && (
+							<Button style={{ color: '#ffffff', marginRight: 20 }} onClick={handleMeterOpen}>
+								<AddIcon />
+								<span style={{ marginLeft: 10 }}>Добавить счетчик</span>
+							</Button>
+						)}
+
+						{isB2B && (
+							<Button style={{ color: '#ffffff', marginRight: 20 }} onClick={handleEventOpen}>
+								<AddIcon />
+								<span style={{ marginLeft: 10 }}>Добавить новость</span>
+							</Button>
+						)}
 
 						<IconButton
 							aria-owns={isMenuOpen ? 'material-appbar' : undefined}
@@ -126,49 +152,109 @@ const TopAppBar: React.FunctionComponent<RouteComponentProps> = ({ history }) =>
 				</Toolbar>
 			</AppBar>
 
-			<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" style={{ minWidth: 400 }}>
-				<DialogTitle id="form-dialog-title">Новый счетчик</DialogTitle>
+			{!isB2B && (
+				<Dialog
+					open={addMeterIsOpen}
+					onClose={handleMeterClose}
+					aria-labelledby="form-dialog-title"
+					style={{ minWidth: 400 }}
+				>
+					<DialogTitle id="form-dialog-title">Новый счетчик</DialogTitle>
 
-				<DialogContent>
-					<DialogContentText>
-						Введите идентификатор нового счетчика. Он указан на информационной наклейке, находящейся на
-						коробке счетчика.
-					</DialogContentText>
+					<DialogContent>
+						<DialogContentText>
+							Введите идентификатор нового счетчика. Он указан на информационной наклейке, находящейся на
+							коробке счетчика.
+						</DialogContentText>
 
-					<TextField
-						autoFocus
-						margin="dense"
-						label="Идентификатор"
-						type="meter_id"
-						fullWidth
-						onChange={event => {
-							setMeterId(event.target.value);
-						}}
-					/>
-				</DialogContent>
+						<TextField
+							autoFocus
+							margin="dense"
+							label="Идентификатор"
+							type="meter_id"
+							fullWidth
+							onChange={event => {
+								setMeterId(event.target.value);
+							}}
+						/>
+					</DialogContent>
 
-				<DialogActions>
-					<Button onClick={handleClose} color="default">
-						Отмена
-					</Button>
+					<DialogActions>
+						<Button onClick={handleMeterClose} color="default">
+							Отмена
+						</Button>
 
-					<Button
-						onClick={() => {
-							handleClose();
+						<Button
+							onClick={() => {
+								handleMeterClose();
 
-							fetch(`${SERVICE_API_URL}/b2c/addmeter?meterId=${meterId}`, {
-								headers: new Headers({
-									'content-type': 'application/json',
-									Authorization: `Bearer ${getJwt()}`
-								})
-							}).then(() => document.location.reload());
-						}}
-						color="primary"
-					>
-						Добавить
-					</Button>
-				</DialogActions>
-			</Dialog>
+								fetch(`${SERVICE_API_URL}/b2c/addmeter?meterId=${meterId}`, {
+									headers: new Headers({
+										'content-type': 'application/json',
+										Authorization: `Bearer ${getJwt()}`
+									})
+								}).then(() => document.location.reload());
+							}}
+							color="primary"
+						>
+							Добавить
+						</Button>
+					</DialogActions>
+				</Dialog>
+			)}
+
+			{isB2B && (
+				<Dialog
+					open={addEventIsOpen}
+					onClose={handleEventClose}
+					aria-labelledby="form-dialog-title"
+					style={{ minWidth: 400 }}
+				>
+					<DialogTitle id="form-dialog-title">Добавить новость</DialogTitle>
+
+					<DialogContent>
+						<DialogContentText>Введите текст новости, которую увидят все жильцы дома.</DialogContentText>
+
+						<TextField
+							autoFocus
+							margin="dense"
+							label="Текст новости"
+							type="event_text"
+							fullWidth
+							onChange={event => {
+								setEventText(event.target.value);
+							}}
+						/>
+					</DialogContent>
+
+					<DialogActions>
+						<Button onClick={handleEventClose} color="default">
+							Отмена
+						</Button>
+
+						<Button
+							onClick={() => {
+								handleEventClose();
+
+								fetch(`${SERVICE_API_URL}/feed/new`, {
+									method: 'POST',
+									body: JSON.stringify({
+										BuildingId: houseId,
+										Text: eventText
+									}),
+									headers: new Headers({
+										'content-type': 'application/json',
+										Authorization: `Bearer ${getJwt()}`
+									})
+								});
+							}}
+							color="primary"
+						>
+							Добавить
+						</Button>
+					</DialogActions>
+				</Dialog>
+			)}
 
 			{renderMenu}
 		</div>

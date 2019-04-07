@@ -25,6 +25,7 @@ export interface User {
 	userType: UserRole;
 	buildingIds?: string[];
 	meters: string[];
+	feed?: NewsEvent[];
 	buildData?: {
 		[buildingId: string]: {
 			address: string;
@@ -47,6 +48,6 @@ export enum UserRole {
 
 export interface NewsEvent {
 	id: string;
-	date: Date;
+	createDate: Date;
 	text: string;
 }
