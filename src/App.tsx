@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import Dashboard from './components/Dashboard/Dashboard';
 import { getJwt, SERVICE_API_URL } from './utils';
@@ -37,7 +37,7 @@ const App: React.FunctionComponent = () => {
 	});
 
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<Helmet>
 				<link
 					href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;subset=cyrillic"
@@ -60,7 +60,7 @@ const App: React.FunctionComponent = () => {
 					<Dashboard />
 				</Route>
 			</Switch>
-		</BrowserRouter>
+		</HashRouter>
 	);
 };
 

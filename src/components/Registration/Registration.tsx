@@ -1,11 +1,12 @@
 import * as React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Select from 'react-select';
-
-import Card from '../Card/Card';
 import { useState } from 'react';
+import TextField from '@material-ui/core/TextField';
 import { OptionsType, ValueType } from 'react-select/lib/types';
+
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+import Select from 'react-select';
+import Card from '../Card/Card';
 import { SERVICE_API_URL } from '../../utils';
 
 const css = require('./Registration.module.css');
@@ -80,7 +81,7 @@ const Registration: React.FunctionComponent = () => {
 
 					<li>
 						<div className={css.auth}>
-							<a href="/auth">или войти</a>
+							<Link to="/auth">или войти</Link>
 						</div>
 					</li>
 				</ul>

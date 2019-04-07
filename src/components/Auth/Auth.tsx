@@ -1,7 +1,8 @@
 import * as React from 'react';
-import Card from '../Card/Card';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+import Card from '../Card/Card';
 
 const css = require('./Auth.module.css');
 
@@ -34,7 +35,7 @@ const Auth: React.FunctionComponent = () => {
 
 					<li>
 						<div className={css.registration}>
-							<a href="/registration">или зарегистрироваться</a>
+							<Link to="/registration">или зарегистрироваться</Link>
 						</div>
 					</li>
 				</ul>
