@@ -22,10 +22,10 @@ export interface User {
 	fullName: string;
 	phone: string;
 	email: string;
-	userType: UserType;
+	userType: UserRole;
 }
 
-export enum UserType {
+export enum UserRole {
 	B2B = 'B2B',
 	B2C = 'B2C'
 }

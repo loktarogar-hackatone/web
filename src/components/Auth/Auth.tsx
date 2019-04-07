@@ -44,6 +44,7 @@ const Auth: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
 			document.location.reload();
 		}
 	};
+
 	return (
 		<div className={css.wrapper}>
 			<Card className={css.card}>

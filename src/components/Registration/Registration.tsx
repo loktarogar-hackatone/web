@@ -9,7 +9,7 @@ import Select from 'react-select';
 
 import Card from '../Card/Card';
 import { SERVICE_API_URL, setJwt } from '../../utils';
-import { UserType } from '../../types';
+import { UserRole } from '../../types';
 
 const css = require('./Registration.module.css');
 
@@ -34,7 +34,7 @@ interface RegistrationResponseBody {
 
 const Registration: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
 	const [options, setOptions] = useState<OptionsType<AutocompleteItem>>([]);
-	const [mode, setMode] = useState(UserType.B2C);
+	const [mode, setMode] = useState(UserRole.B2C);
 
 	const handleChange = (value: ValueType<AutocompleteItem>) => {
 		console.log(value);
@@ -71,7 +71,13 @@ const Registration: React.FunctionComponent<RouteComponentProps> = ({ history })
 			BuildingId: formData.get('BuildingId') as string
 		};
 
-		const response = await fetch(`${SERVICE_API_URL}/auth/register/b2c`, {
+		if (mode === UserRole.B2C) {
+			requestBody.BuildingId = formData.get('BuildingId') as string;
+		} else {
+			requestBody.Inn = formData.get('Inn') as string;
+		}
+
+		const response = await fetch(`${SERVICE_API_URL}/auth/register/${mode === UserRole.B2C ? 'b2c' : 'b2b'}`, {
 			method: 'POST',
 			body: JSON.stringify(requestBody),
 			headers: new Headers({
@@ -89,7 +95,7 @@ const Registration: React.FunctionComponent<RouteComponentProps> = ({ history })
 	};
 
 	const handleModeChange = (event: React.ChangeEvent, checked: boolean) => {
-		setMode(checked ? UserType.B2B : UserType.B2C);
+		setMode(checked ? UserRole.B2B : UserRole.B2C);
 	};
 
 	return (
@@ -100,7 +106,7 @@ const Registration: React.FunctionComponent<RouteComponentProps> = ({ history })
 				<div>
 					<label>
 						Зарегистрировать УК
-						<Switch color="primary" checked={mode === UserType.B2B} onChange={handleModeChange} />
+						<Switch color="primary" checked={mode === UserRole.B2B} onChange={handleModeChange} />
 					</label>
 				</div>
 
@@ -136,7 +142,7 @@ const Registration: React.FunctionComponent<RouteComponentProps> = ({ history })
 						</li>
 
 						<li>
-							{mode === UserType.B2C ? (
+							{mode === UserRole.B2C ? (
 								<Select
 									options={options}
 									onChange={handleChange}

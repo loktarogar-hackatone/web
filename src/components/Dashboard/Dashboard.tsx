@@ -8,11 +8,16 @@ import Apartment from '../Apartment/Apartment';
 import Company from '../Company/Company';
 import Feed from '../Feed/Feed';
 import Card from '../Card/Card';
+import { User as UserType } from '../../types';
 
 const { YMaps } = require('react-yandex-maps');
 const css = require('./Dashboard.module.css');
 
-const Dashboard: React.FunctionComponent = () => {
+interface Props {
+	user: UserType;
+}
+
+const Dashboard: React.FunctionComponent<Props> = ({ user }) => {
 	return (
 		<YMaps>
 			<TopAppBar />
@@ -57,7 +62,7 @@ const Dashboard: React.FunctionComponent = () => {
 						/>
 					</Card>
 
-					<User />
+					<User user={user} />
 
 					<Company
 						company={{

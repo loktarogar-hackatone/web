@@ -54,7 +54,7 @@ const App: React.FunctionComponent<RouteComponentProps> = ({ history, location }
 			<Switch>
 				{currentUser && (
 					<Route path="/">
-						<Dashboard />
+						<Dashboard user={currentUser} />
 					</Route>
 				)}
 
