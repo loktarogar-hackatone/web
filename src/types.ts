@@ -19,9 +19,10 @@ export interface Company {
 export interface User {
 	id: string;
 	clientId: string;
-	name: string;
+	fullName: string;
 	phone: string;
 	email: string;
+	userType: 'B2C'|'B2B';
 }
 
 export interface NewsEvent {

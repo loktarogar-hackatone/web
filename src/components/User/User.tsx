@@ -25,7 +25,7 @@ const User: React.FunctionComponent<Props> = ({ user }) => {
 				</li>
 
 				<li>
-					<label>Жилец</label> {user.name}
+					<label>Жилец</label> {user.fullName}
 				</li>
 
 				{/*<li>*/}

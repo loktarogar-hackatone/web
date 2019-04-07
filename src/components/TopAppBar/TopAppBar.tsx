@@ -12,6 +12,8 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import { RouteComponentProps, withRouter } from 'react-router';
+import { removeJwt } from '../../utils';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -43,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const TopAppBar: React.FunctionComponent = () => {
+const TopAppBar: React.FunctionComponent<RouteComponentProps> = ({ history, location }) => {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement>(null);
 
@@ -57,6 +59,13 @@ const TopAppBar: React.FunctionComponent = () => {
 		setAnchorEl(null);
 	}
 
+	function handleLogout() {
+		removeJwt();
+		handleMenuClose();
+		history.push('/');
+		document.location.reload();
+	}
+
 	const renderMenu = (
 		<Menu
 			anchorEl={anchorEl}
@@ -65,8 +74,8 @@ const TopAppBar: React.FunctionComponent = () => {
 			open={isMenuOpen}
 			onClose={handleMenuClose}
 		>
-			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
+			<MenuItem onClick={handleMenuClose}>Профиль</MenuItem>
+			<MenuItem onClick={handleLogout}>Выход</MenuItem>
 		</Menu>
 	);
 
@@ -85,11 +94,11 @@ const TopAppBar: React.FunctionComponent = () => {
 					<div className={classes.grow} />
 
 					<div className={classes.sectionDesktop}>
-						<IconButton color="inherit">
-							<Badge badgeContent={17} color="secondary">
-								<NotificationsIcon />
-							</Badge>
-						</IconButton>
+						{/*<IconButton color="inherit">*/}
+						{/*<Badge badgeContent={17} color="secondary">*/}
+						{/*<NotificationsIcon />*/}
+						{/*</Badge>*/}
+						{/*</IconButton>*/}
 
 						<IconButton
 							aria-owns={isMenuOpen ? 'material-appbar' : undefined}
@@ -108,4 +117,4 @@ const TopAppBar: React.FunctionComponent = () => {
 	);
 };
 
-export default TopAppBar;
+export default withRouter(TopAppBar);

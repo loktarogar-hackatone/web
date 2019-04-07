@@ -61,9 +61,10 @@ function Dashboard() {
 						user={{
 							id: '1',
 							clientId: '857350124124',
-							name: 'Наумов Павел Анатольевич',
+							fullName: 'Наумов Павел Анатольевич',
 							phone: '+7 (927) 132-41-21',
-							email: 'some-email@gmail.com'
+							email: 'some-email@gmail.com',
+							userType: 'B2C'
 						}}
 					/>
 

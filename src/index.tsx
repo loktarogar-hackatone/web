@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { install, ThemeProvider } from '@material-ui/styles';
+import Helmet from 'react-helmet';
+import { HashRouter } from 'react-router-dom';
 
 install();
 
@@ -20,7 +22,16 @@ ReactDOM.render(
 			} as any
 		}
 	>
-		<App />
+		<Helmet>
+			<link
+				href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;subset=cyrillic"
+				rel="stylesheet"
+			/>
+		</Helmet>
+
+		<HashRouter>
+			<App />
+		</HashRouter>
 	</ThemeProvider>,
 	document.getElementById('root')
 );
