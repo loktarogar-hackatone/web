@@ -4,16 +4,19 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { fade } from '@material-ui/core/styles/colorManipulator';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { removeJwt } from '../../utils';
+import { getJwt, removeJwt, SERVICE_API_URL } from '../../utils';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/AddCircle';
+import { Dialog } from '@material-ui/core';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -45,9 +48,11 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const TopAppBar: React.FunctionComponent<RouteComponentProps> = ({ history, location }) => {
+const TopAppBar: React.FunctionComponent<RouteComponentProps> = ({ history }) => {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement>(null);
+	const [open, setOpen] = React.useState(false);
+	const [meterId, setMeterId] = React.useState('');
 
 	const isMenuOpen = Boolean(anchorEl);
 
@@ -64,6 +69,14 @@ const TopAppBar: React.FunctionComponent<RouteComponentProps> = ({ history, loca
 		handleMenuClose();
 		history.push('/');
 		document.location.reload();
+	}
+
+	function handleClickOpen() {
+		setOpen(true);
+	}
+
+	function handleClose() {
+		setOpen(false);
 	}
 
 	const renderMenu = (
@@ -96,6 +109,11 @@ const TopAppBar: React.FunctionComponent<RouteComponentProps> = ({ history, loca
 						{/*</Badge>*/}
 						{/*</IconButton>*/}
 
+						<Button style={{ color: '#ffffff', marginRight: 20 }} onClick={handleClickOpen}>
+							<AddIcon />
+							<span style={{ marginLeft: 10 }}>Добавить счетчик</span>
+						</Button>
+
 						<IconButton
 							aria-owns={isMenuOpen ? 'material-appbar' : undefined}
 							aria-haspopup="true"
@@ -107,6 +125,50 @@ const TopAppBar: React.FunctionComponent<RouteComponentProps> = ({ history, loca
 					</div>
 				</Toolbar>
 			</AppBar>
+
+			<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" style={{ minWidth: 400 }}>
+				<DialogTitle id="form-dialog-title">Новый счетчик</DialogTitle>
+
+				<DialogContent>
+					<DialogContentText>
+						Введите идентификатор нового счетчика. Он указан на информационной наклейке, находящейся на
+						коробке счетчика.
+					</DialogContentText>
+
+					<TextField
+						autoFocus
+						margin="dense"
+						label="Идентификатор"
+						type="meter_id"
+						fullWidth
+						onChange={event => {
+							setMeterId(event.target.value);
+						}}
+					/>
+				</DialogContent>
+
+				<DialogActions>
+					<Button onClick={handleClose} color="default">
+						Отмена
+					</Button>
+
+					<Button
+						onClick={() => {
+							handleClose();
+
+							fetch(`${SERVICE_API_URL}/b2c/addmeter?meterId=${meterId}`, {
+								headers: new Headers({
+									'content-type': 'application/json',
+									Authorization: `Bearer ${getJwt()}`
+								})
+							}).then(() => document.location.reload());
+						}}
+						color="primary"
+					>
+						Добавить
+					</Button>
+				</DialogActions>
+			</Dialog>
 
 			{renderMenu}
 		</div>

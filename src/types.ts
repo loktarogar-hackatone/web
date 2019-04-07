@@ -24,12 +24,20 @@ export interface User {
 	email: string;
 	userType: UserRole;
 	buildingIds?: string[];
+	meters: string[];
 	buildData?: {
 		[buildingId: string]: {
 			address: string;
 			managementCompany: string;
 		}
 	};
+}
+
+export enum MeterType {
+	HotWater = 0,
+	ColdWater = 1,
+	Electric  = 2,
+	Gas = 3
 }
 
 export enum UserRole {

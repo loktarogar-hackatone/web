@@ -41,8 +41,8 @@ const Dashboard: React.FunctionComponent<Props> = ({ user }) => {
 					</div>
 
 					<div className={css.col}>
-						<Charts meter="0" title="Горячая вода" />
-						<Charts meter="0" title="Холодная вода" />
+						<Charts meter="0" />
+						<Charts meter="0" />
 					</div>
 
 					<div className={css.col}>
@@ -84,8 +84,7 @@ const Dashboard: React.FunctionComponent<Props> = ({ user }) => {
 					</div>
 
 					<div className={css.col}>
-						<Charts meter="0" title="Горячая вода" />
-						<Charts meter="0" title="Холодная вода" />
+						{user.meters && user.meters.map(meterId => <Charts key={meterId} meter={meterId} />)}
 
 						<User user={user} />
 
