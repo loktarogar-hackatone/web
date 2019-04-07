@@ -38,7 +38,8 @@ const Dashboard: React.FunctionComponent<Props> = ({ user }) => {
 				</div>
 
 				<div className={css.col}>
-					<Charts meter="0" />
+					<Charts meter="0" title="Горячая вода" />
+					<Charts meter="0" title="Холодная вода" />
 
 					<User user={user} />
 

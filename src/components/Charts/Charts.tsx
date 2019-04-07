@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { Bar, ChartData } from 'react-chartjs-2';
-import Card from '../Card/Card';
 import { useEffect, useState } from 'react';
+import { Bar, ChartData } from 'react-chartjs-2';
+import ChartIcon from '@material-ui/icons/InsertChart';
+
+import Card from '../Card/Card';
 import { SERVICE_API_URL } from '../../utils';
 
 interface Props {
+	title: string;
 	meter: string;
 }
 
-const Charts: React.FunctionComponent<Props> = ({ meter }) => {
+const Charts: React.FunctionComponent<Props> = ({ title, meter }) => {
 	const [data, setData] = useState<ChartData<any>>(null);
 
 	const getChartsData = async () => {
@@ -41,7 +44,7 @@ const Charts: React.FunctionComponent<Props> = ({ meter }) => {
 			labels: labels,
 			datasets: [
 				{
-					label: 'горячая вода, м³',
+					label: 'м³',
 					backgroundColor: 'rgba(255,99,132,0.2)',
 					borderColor: 'rgba(255,99,132,1)',
 					borderWidth: 1,
@@ -58,7 +61,14 @@ const Charts: React.FunctionComponent<Props> = ({ meter }) => {
 	}, []);
 
 	return (
-		<Card>
+		<Card
+			title={
+				<>
+					<ChartIcon />
+					<span>{title}</span>
+				</>
+			}
+		>
 			{data && (
 				<Bar
 					data={data}
